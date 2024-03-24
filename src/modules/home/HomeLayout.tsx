@@ -195,7 +195,7 @@ const Linear = styled.div`
     position: absolute;
     width: 100%;
     top: 0;
-    background: linear-gradient(1deg, #000000, #000000, transparent);
+    background: linear-gradient(177deg, #000000, #000000, transparent);
     height: 500px;
   }
 `;
