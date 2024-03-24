@@ -33,6 +33,9 @@ Tailoring your cover letter and resume is one of the best ways to get more inter
 <img width="1199" alt="Screen Shot 2024-03-24 at 12 09 24 AM" src="https://github.com/zabloncharles/CVWizard/assets/74889517/01ed57b6-93bc-42a0-bf49-48535b045b9b">
 </div>
 
+## Cover letter and resume
+Check out the live link here : [http://www.careerwiz.netlify.app](https://careerwizard.netlify.app)
+
 ## Contributing Guide
 
 If you are interested in contributing (fixing bugs, impoving features, or creating a resume template), please refer to [Contributing Guide](./CONTRIBUTING.md).
