@@ -101,12 +101,26 @@ const HomeLayout = () => {
       </TopContent>
 
       <motion.div
-        className="mx-6 md:mx-40 xl:mx-60 my-32 w-75"
+        className="mx-6 xl:mx-60 my-32 w-75"
         style={{ fontFamily: "'Roboto Slab', serif" }}
         initial={{ opacity: 0 }}
         animate={animationEffectsFirstLoad}
         transition={transtionEffects}
       >
+        <FirstCard>
+          <div className="top-image"></div>
+          <div className="text-under-image">som people wish</div>
+          <div className="two-sections">
+            <div>
+              <div className="left-top">Pioneering Success</div>
+              <div className="left-bottom">Big Success</div>
+            </div>
+            <div>
+              <div className="right-top">somee hteehfhsf sf hf sd sjdjsdsj djd fdffd</div>
+              <div className="right-bottom">some jargon</div>
+            </div>
+          </div>
+        </FirstCard>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <FeatureSection />
         </div>
@@ -327,5 +341,31 @@ const FlippedText = styled.div`
     height: 1px;
     width: 50px;
     background-color: white;
+  }
+`;
+const FirstCard = styled.div`
+  // Your styles here
+  width: 100%;
+  flex: 1;
+  .top-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://cdn.dribbble.com/userupload/7289230/file/original-234bca9a2dc55ec39fc69e428739be8f.jpg?resize=2048x2048');
+    height: 300px;
+    width: 100%;
+    border-radius: 12px;
+
+    .text-under-image {
+      display: flex;
+      justify-content: space-between;
+      color: #ee0505;
+      font-size: 20px;
+    }
+    .two-sections {
+      display: flex;
+      justify-content: space-between;
+      background: aquamarine;
+    }
   }
 `;

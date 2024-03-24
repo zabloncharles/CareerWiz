@@ -1,11 +1,13 @@
-import Image from 'next/image';
-import Link from 'next/link';
+// import Image from 'next/image';
+// import Link from 'next/link';
 import styled from 'styled-components';
+// import { GiPaintBrush } from 'react-icons/gi';
 
 function FeatureSection() {
   return (
     <>
       <FeatCard>
+        <div className="title">Customise</div>
         <div className="icon">
           <div></div>
         </div>
@@ -14,56 +16,41 @@ function FeatureSection() {
         </div>
       </FeatCard>
 
-      <FeatureCard>
-        <CardPinnnedIcon>
+      <FeatCard>
+        {/* <CardPinnnedIcon>
           <Image src="/icons/speed.svg" alt="speed" height="56" width="56" />
-        </CardPinnnedIcon>
-        <p className="text-xl mr-14">
+        </CardPinnnedIcon> */}
+        <div className="title">Simple</div>
+        <div className="icon">
+          <div></div>
+        </div>
+        <p className="desc">
           Simple <strong>interface</strong> that helps you build quicky!
         </p>
-      </FeatureCard>
+      </FeatCard>
 
-      <FeatureCard>
-        <CardPinnnedIcon>
-          <Image src="/icons/magic.svg" alt="magic" height="56" width="56" />
-        </CardPinnnedIcon>
-        <p className="text-xl mr-14">
+      <FeatCard>
+        <div className="title">Easy</div>
+        <div className="icon">
+          <div></div>
+        </div>
+        <p className="desc">
           No <strong>sign up </strong>needed — go straight to building!
         </p>
-      </FeatureCard>
+      </FeatCard>
 
-      <FeatureCard>
-        <CardPinnnedIcon>
-          <Image src="/icons/lock.svg" alt="lock" height="56" width="56" />
-        </CardPinnnedIcon>
-        <p className="text-xl mr-14">
+      <FeatCard>
+        <div className="title">Customise</div>
+        <div className="icon">
+          <div></div>
+        </div>
+        <p className="desc">
           Your <strong>data</strong> never leaves your device
         </p>
-      </FeatureCard>
+      </FeatCard>
     </>
   );
 }
-
-const FeatureCard = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div
-      className={`transition ease-in-out delay-100 duration-300 bg-resume-100 hover:bg-resume-500 text-resume-800
-      hover:text-resume-50 fill-resume-800 px-6 py-10 lg:p-12 flex shadow-md cursor-pointer relative rounded-xl h-full`}
-    >
-      <Link href="/builder" passHref={true}>
-        {children}
-      </Link>
-    </div>
-  );
-};
-
-const CardPinnnedIcon = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div className="backdrop-blur-2xl bg-resume-100 rounded-full p-2 shadow-level-hard absolute right-0 top-0 -mt-4 -mr-1">
-      {children}
-    </div>
-  );
-};
 
 export default FeatureSection;
 
@@ -77,7 +64,10 @@ const FeatCard = styled.div`
   align-items: center;
   padding: 20px;
   border-radius: 0px;
+  min-height: 190px;
 
+  .title {
+  }
   .icon {
     display: flex;
     border-right: solid 1px white;
@@ -85,7 +75,12 @@ const FeatCard = styled.div`
     padding-right: 10px;
 
     :nth-child(1) {
-      background: url('https://cdn.dribbble.com/userupload/7289230/file/original-234bca9a2dc55ec39fc69e428739be8f.jpg?resize=2048x2048');
+      width: 90px;
+      height: 90px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: url('https://cdn.dribbble.com/userupload/7289230/file/original-234bca9a2dc55ec39fc69e428739be8f.jpg?resize=2048x2048');
+      padding-right: 10px;
     }
   }
   .desc {
