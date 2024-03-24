@@ -1,6 +1,6 @@
 import { NavBarActions, StyledButton } from '../builder/nav-bar/atoms';
 import { motion } from 'framer-motion';
-
+import { FaFileCsv } from 'react-icons/fa';
 import { BsGithub } from 'react-icons/bs';
 import { Button } from '@mui/material';
 import FeatureSection from './components/Feature';
@@ -85,12 +85,7 @@ const HomeLayout = () => {
               BUILD YOUR RESUME
             </Button>
           </Link>
-          <p
-            className="header-desc2 xl:invisible text-resume-800"
-            style={{ fontFamily: "'Roboto Slab', serif" }}
-          >
-            Desktop screen recommended
-          </p>
+          <p className="header-desc2 xl:invisible text-resume-800">Desktop screen recommended</p>
         </HeaderDesc>
 
         <FlippedText>
@@ -100,8 +95,7 @@ const HomeLayout = () => {
       </TopContent>
 
       <motion.div
-        className="mx-6 xl:mx-60 my-32 w-75"
-        style={{ fontFamily: "'Roboto Slab', serif" }}
+        className="mx-6 xl:mx-60 my-10 w-75"
         initial={{ opacity: 0 }}
         animate={animationEffectsFirstLoad}
         transition={transtionEffects}
@@ -109,29 +103,33 @@ const HomeLayout = () => {
         <FirstCard>
           <div className="top-image"></div>
           <ProfileText>
-            <div>some</div>
-            <div>vick</div>
-            <div>best</div>
+            <div>more interviews</div>
+            <div>more job offers</div>
+            <div>resume templates</div>
           </ProfileText>
           <Secters>
             <div>
-              <div className="left-top">Pioneering Success</div>
-              <div className="left-bottom">Big Success</div>
+              <div className="left-top">Create Your Profile</div>
+              <div className="left-bottom">Get Hired</div>
             </div>
             <div>
-              <div className="right-top">somee hteehfhsf sf hf sd sjdjsdsj djd fdffd</div>
-              <div className="right-bottom">Big Success</div>
+              <div className="right-top">
+                Easily create the perfect resume for any job using our best-in-class resume builder
+                platform.
+              </div>
+              <div className="right-bottom">
+                <FaFileCsv />
+              </div>
             </div>
           </Secters>
         </FirstCard>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <FeatureSection />
-        </div>
+
+        <FeatureSection />
       </motion.div>
 
       {/* THIRD SECTION */}
       <StyledFooter>
-        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+        <p>&copy; 2024 CvWizard. All rights reserved.</p>
       </StyledFooter>
     </motion.div>
   );
@@ -336,6 +334,20 @@ const Secters = styled.div`
     padding-left: 10px;
     color: white;
     font-family: 'cisnero';
+    background: linear-gradient(to right, rgb(255, 253, 253), rgb(255 15 54)) text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  > :nth-child(2) {
+    line-height: 1.5;
+    padding: 10px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: end;
+    justify-content: end;
+    align-items: end;
   }
 `;
 const ProfileText = styled.div`
@@ -348,7 +360,8 @@ const ProfileText = styled.div`
 `;
 // Define the styles for the footer using Styled Components
 const StyledFooter = styled.footer`
-  background-color: #333;
+  background-color: #000000;
+  border-top: #141414;
   color: #fff;
   padding: 20px;
   text-align: center;
