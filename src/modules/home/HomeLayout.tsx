@@ -6,7 +6,6 @@ import { Button } from '@mui/material';
 import FeatureSection from './components/Feature';
 import Image from 'next/image';
 import Link from 'next/link';
-import Person from './components/Person';
 import styled from 'styled-components';
 
 const HomeLayout = () => {
@@ -109,17 +108,21 @@ const HomeLayout = () => {
       >
         <FirstCard>
           <div className="top-image"></div>
-          <div className="text-under-image">som people wish</div>
-          <div className="two-sections">
+          <ProfileText>
+            <div>some</div>
+            <div>vick</div>
+            <div>best</div>
+          </ProfileText>
+          <Secters>
             <div>
               <div className="left-top">Pioneering Success</div>
               <div className="left-bottom">Big Success</div>
             </div>
             <div>
               <div className="right-top">somee hteehfhsf sf hf sd sjdjsdsj djd fdffd</div>
-              <div className="right-bottom">some jargon</div>
+              <div className="right-bottom">Big Success</div>
             </div>
-          </div>
+          </Secters>
         </FirstCard>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <FeatureSection />
@@ -127,77 +130,9 @@ const HomeLayout = () => {
       </motion.div>
 
       {/* THIRD SECTION */}
-      <div className="bg-resume-50 my-32">
-        <div
-          id="contribute"
-          className="mx-6 md:mx-40 xl:mx-60 py-12"
-          style={{ fontFamily: "'Roboto Slab', serif" }}
-        >
-          <div className="grid grid-cols-12 items-center text-center">
-            <div className="col-span-12 lg:col-span-4 mb-4 lg:mb-0 flex flex-col items-center gap-2">
-              <Image src={'/icons/palette.svg'} alt="logo" height="48" width="48" />
-              <p className="text-resume-800 text-xl mt-2">
-                Do you want to make your own <strong>template?</strong>
-              </p>
-            </div>
-            <div className="col-span-12 lg:col-span-1 mb-4 lg:mb-0 text-resume-800 text-4xl">
-              <p>+</p>
-            </div>
-            <div className="col-span-12 lg:col-span-2 flex flex-col items-center gap-2">
-              <Image src={'/icons/terminal.svg'} alt="logo" height="48" width="48" />
-              <p className="text-resume-800 text-xl mt-2">
-                Do you write <strong>React</strong> code?
-              </p>
-            </div>
-            <div className="invisible lg:visible lg:col-span-2 text-resume-800 text-4xl mx-6">
-              <p>=</p>
-            </div>
-            <div className="col-span-12 lg:col-span-3 mx-auto flex flex-col items-center gap-2">
-              <div className="mb-6">
-                <Image src={'/icons/wave.svg'} alt="logo" height="48" width="48" />
-              </div>
-              <div>
-                <a
-                  href="https://github.com/sadanandpai/resume-builder"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Button variant="contained" className="bg-resume-800 mt-2 lg:mt-5 mb-3">
-                    CONTRIBUTE
-                  </Button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        id="about-us"
-        className="mx-6 md:mx-40 xl:mx-60 my-32"
-        style={{ fontFamily: "'Roboto Slab', serif" }}
-      >
-        <h2 className="text-resume-800 text-3xl mb-2 text-center lg:text-left">About us</h2>
-        <p className="text-resume-400 mb-8 text-center lg:text-left">
-          A bunch of developers and designers — who love to build open source projects and learn
-          along!
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Person />
-        </div>
-        <p className="text-resume-400 my-8 text-center lg:text-left">
-          Read our design story on&nbsp;
-          <a
-            href="https://medium.com/@yakshag/e-resume-build-a-professional-resume-design-case-study-3dc02a6359ea"
-            target="_blank"
-            rel="noreferrer"
-            className="underline"
-          >
-            Medium
-          </a>
-          ↗
-        </p>
-      </div>
+      <StyledFooter>
+        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+      </StyledFooter>
     </motion.div>
   );
 };
@@ -206,7 +141,7 @@ export default HomeLayout;
 
 const Navbar = styled.div`
   // Your styles here
-  background-color: #00000080;
+
   backdrop-filter: blur(44px);
   display: flex;
   -webkit-box-pack: justify;
@@ -257,6 +192,14 @@ const Linear = styled.div`
   bottom: 0;
   background: linear-gradient(1deg, #000000, #000000, transparent);
   height: 50%;
+  /* for iphone */
+  @media screen and (max-width: 1000px) {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    background: linear-gradient(1deg, #000000, #000000, transparent);
+    height: 500px;
+  }
 `;
 
 const HeaderPic = styled.div`
@@ -347,25 +290,66 @@ const FirstCard = styled.div`
   // Your styles here
   width: 100%;
   flex: 1;
+  background-color: #141414;
+  padding: 20px;
+  margin-bottom: 20px;
   .top-image {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url('https://cdn.dribbble.com/userupload/7289230/file/original-234bca9a2dc55ec39fc69e428739be8f.jpg?resize=2048x2048');
+    background-image: url('https://cdn.dribbble.com/userupload/12685516/file/original-1aa08df9eb680947c23c8c99dee29f81.jpg?resize=1504x1128');
     height: 300px;
     width: 100%;
     border-radius: 12px;
+  }
+`;
+const Secters = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background: #141414;
+  box-shadow: 0px 0px 60px #000000, -20px -20px 60px #1b1b1b;
+  padding: 20px;
+  gap: 20px;
+  color: white;
 
-    .text-under-image {
-      display: flex;
-      justify-content: space-between;
-      color: #ee0505;
-      font-size: 20px;
-    }
-    .two-sections {
-      display: flex;
-      justify-content: space-between;
-      background: aquamarine;
+  /* for iphone */
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .left-top {
+    background-color: black;
+    padding: 5px 14px;
+    width: fit-content;
+    border-radius: 33px;
+    @media screen and (max-width: 1000px) {
+      width: 100%;
     }
   }
+  .left-section {
+    color: white;
+    font-family: cisnero;
+  }
+  .left-bottom {
+    font-size: 60px;
+    padding-left: 10px;
+    color: white;
+    font-family: 'cisnero';
+  }
+`;
+const ProfileText = styled.div`
+  // Your styles here
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 20px;
+`;
+// Define the styles for the footer using Styled Components
+const StyledFooter = styled.footer`
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
 `;
