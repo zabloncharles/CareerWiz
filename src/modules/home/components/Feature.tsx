@@ -34,13 +34,13 @@ function FeatureSection() {
             }}
           ></div>
 
-          <p className="desc">
+          <div className="desc">
             <div className="title">Simple</div>
             <div>
               {' '}
               Simple <strong>interface</strong> that helps you build quicky!
             </div>
-          </p>
+          </div>
         </FeatCard>
 
         <FeatCard>
@@ -51,12 +51,12 @@ function FeatureSection() {
             }}
           ></div>
 
-          <p className="desc">
+          <div className="desc">
             <div className="title">
               Easy <PiCodeSimpleLight />
             </div>
             <div>No sign up needed — go straight to building!</div>
-          </p>
+          </div>
         </FeatCard>
 
         <FeatCard>
@@ -67,12 +67,12 @@ function FeatureSection() {
             }}
           ></div>
 
-          <p className="desc">
+          <div className="desc">
             <div className="title">
               Privacy <FaDharmachakra />
             </div>
             <div>Your data never leaves your device</div>
-          </p>
+          </div>
         </FeatCard>
       </div>
     </FeatureNav>

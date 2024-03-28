@@ -25,7 +25,7 @@ const HomeLayout = () => {
         <Link href="/">
           <Image src={'/icons/resume-icon.png'} alt="logo" height="36" width="36" />
         </Link>
-        <div className="flex-auto flex justify-between items-center ml-5">
+        <div className="">
           {/* <NavBarActions>
             <Link href="/builder" passHref={true}>
               <StyledButton variant="text">ResumeX</StyledButton>
@@ -195,8 +195,8 @@ const Linear = styled.div`
     position: absolute;
     width: 100%;
     top: 0;
-    background: linear-gradient(177deg, #000000, #000000, transparent);
-    height: 500px;
+    background: linear-gradient(177deg, #000000, #000000, transparent, black, black);
+    height: 670px;
   }
 `;
 
@@ -235,6 +235,10 @@ const HeaderDesc = styled.div`
     color: white;
     font-family: 'Spline Sans Mono', sans-serif;
     text-align: end;
+    /* for iphone */
+    @media screen and (max-width: 1000px) {
+      text-align: center;
+    }
   }
   .button {
     background-color: black;
@@ -288,8 +292,8 @@ const FirstCard = styled.div`
   // Your styles here
   width: 100%;
   flex: 1;
-  background-color: #141414;
-  padding: 20px;
+
+  padding: 10px;
   margin-bottom: 20px;
   .top-image {
     background-size: cover;
@@ -357,6 +361,11 @@ const ProfileText = styled.div`
   color: #ffffff;
   font-size: 20px;
   padding: 20px;
+  @media screen and (max-width: 1000px) {
+    font-size: 12px;
+    text-align: center;
+    justify-content: space-around;
+  }
 `;
 // Define the styles for the footer using Styled Components
 const StyledFooter = styled.footer`
