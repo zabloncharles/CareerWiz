@@ -23,7 +23,8 @@ const HomeLayout = () => {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: [0, 1] }} className="scroll-smooth">
       <Navbar>
         <Link href="/">
-          <Image src={'/icons/resume-icon.png'} alt="logo" height="36" width="36" />
+          {/* <Image src={'/icons/resume-icon.png'} alt="logo" height="36" width="50px" /> */}
+          <div className="logo-pic"></div>
         </Link>
         <div className="">
           {/* <NavBarActions>
@@ -37,11 +38,11 @@ const HomeLayout = () => {
                 Contribute
               </StyledButton>
             </Link>
-            <Link href="#about-us" passHref={true}>
+            <Link href={'https://github.com/zabloncharles/'} passHref={true}>
               <StyledButton variant="text">About us</StyledButton>
             </Link>
             <a
-              href={'https://github.com/sadanandpai/resume-builder'}
+              href={'https://github.com/zabloncahrles/careerwiz'}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -141,6 +142,7 @@ const Navbar = styled.div`
   // Your styles here
 
   backdrop-filter: blur(44px);
+  background-color: #000000b4;
   display: flex;
   -webkit-box-pack: justify;
   justify-content: space-between;
@@ -151,6 +153,13 @@ const Navbar = styled.div`
   z-index: 99;
   position: fixed;
 
+  .logo-pic {
+    background-image: url('/icons/resume-icon.png');
+    width: 190px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
   @media screen and (min-width: 1000px) {
     top: 21px;
     color: white;
@@ -205,7 +214,6 @@ const HeaderPic = styled.div`
   background-color: red;
   background: url('https://cdn.dribbble.com/userupload/13091011/file/original-ad5b9b255d5eb3b70e24efc56d3e31a4.jpg?resize=2400x1969');
   background-position: center;
-  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -230,6 +238,10 @@ const HeaderDesc = styled.div`
     background: linear-gradient(to right, rgb(255, 253, 253), rgb(223, 70, 0)) text;
     -webkit-text-fill-color: transparent;
     font-family: 'Spline Sans Mono', sans-serif;
+
+    @media screen and (max-width: 1000px) {
+      font-size: 16px;
+    }
   }
   .header-desc2 {
     color: white;
@@ -267,7 +279,7 @@ const VerticalLines = styled.div`
   > div {
     width: 1px;
     height: 100%;
-    background-color: #2f2e2e;
+    background: linear-gradient(to top, transparent, #2f2e2e, transparent);
   }
 `;
 const FlippedText = styled.div`
@@ -282,6 +294,14 @@ const FlippedText = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
+
+  @media screen and (max-width: 1000px) {
+    bottom: 199px;
+    left: 30px;
+    right: 30px;
+    z-index: 3;
+    filter: invert(1);
+  }
   > :nth-child(1) {
     height: 1px;
     width: 50px;
@@ -299,17 +319,22 @@ const FirstCard = styled.div`
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url('https://cdn.dribbble.com/userupload/12685516/file/original-1aa08df9eb680947c23c8c99dee29f81.jpg?resize=1504x1128');
-    height: 300px;
+    background-image: url('https://cdn.dribbble.com/users/14744021/screenshots/20460304/media/3f419e63401363e71ec7f318b7fc9504.png?resize=1600x1200&vertical=center');
+    height: 250px;
     width: 100%;
     border-radius: 12px;
+
+    @media screen and (max-width: 1000px) {
+      margin-top: -150px;
+      z-index: 2;
+      position: relative;
+    }
   }
 `;
 const Secters = styled.div`
   display: flex;
   justify-content: space-between;
-  background: #141414;
-  box-shadow: 0px 0px 60px #000000, -20px -20px 60px #1b1b1b;
+
   padding: 20px;
   gap: 20px;
   color: white;
@@ -318,6 +343,9 @@ const Secters = styled.div`
   @media screen and (max-width: 1000px) {
     flex-direction: column;
     text-align: center;
+    border-radius: 15px;
+    gap: 0px;
+    border: 1px solid #252222;
   }
 
   .left-top {
@@ -352,6 +380,13 @@ const Secters = styled.div`
     text-align: end;
     justify-content: end;
     align-items: end;
+    @media screen and (max-width: 1000px) {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: -10px;
+    }
   }
 `;
 const ProfileText = styled.div`

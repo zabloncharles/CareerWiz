@@ -83,7 +83,7 @@ export default FeatureSection;
 
 const FeatureNav = styled.div`
   // Your styles here
-  background-color: #1d1c1c73;
+
   padding: 20px 10px;
 `;
 
