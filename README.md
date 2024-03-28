@@ -1,54 +1,49 @@
 <div align="center">
+<img width="408" alt="Screen Shot 2024-03-24 at 12 13 23 AM" src="https://github.com/zabloncharles/CVWizard/assets/74889517/9d3371ec-5d68-4dfc-9f35-bfd49f1ebeff">
 
-# Resume Builder
-
-### Free and open source, fully customizable professional single page resume builder
-
-<a href="https://e-resume.vercel.app/"><img src="https://user-images.githubusercontent.com/12962887/201484876-75290af9-ccd6-4f6d-be96-6a8fb4f20c4b.png" alt="get started with resume builder" height="200" widdth="330" />
-
-https://e-resume.vercel.app
-
-[![](https://img.shields.io/github/stars/sadanandpai/single-page-resume-builder?style=for-the-badge)](#stars)
-[![](https://img.shields.io/github/forks/sadanandpai/single-page-resume-builder?style=for-the-badge)](#forks)
-
+# Build Your Resume
 [![NextJS](https://skillicons.dev/icons?i=nextjs)](https://nextjs.org/)
 [![Material React](https://skillicons.dev/icons?i=materialui)](https://mui.com/)
 [![TailwindCSS](https://skillicons.dev/icons?i=tailwind)](https://tailwindcss.com/)
-<a href="https://github.com/pmndrs/zustand"><img src="http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/bear-face.png" alt="" height="48" width="48" /></a>
+### "Easily create the perfect resume for any job using our best-in-class resume builder platform."
 
-</div>
+
+<img width="1199" alt="Screen Shot 2024-03-24 at 12 09 06 AM" src="https://github.com/zabloncharles/CVWizard/assets/74889517/33933a93-c2ef-4194-b1c2-41a3c12f2685">
+
 
 ## About
 
-[Resume Builder](https://e-resume.vercel.app) is an open source application where one can effectively build a single page professional resume.
+CareerWiz is an open source application where one can effectively build a single page professional resume.
 
 Visit our [User Guide](USER_GUIDE.md) to start building!
 
 Features:
 
-- Customise with templates and themes!
-- Simple interface that helps you build quicky!
-- No sign up needed — go straight to building!
-- Your data never leaves your device
+Customise with templates and themes!
+Simple interface that helps you build quicky!
+No sign up needed — go straight to building!
+Your data never leaves your device
 
-> Disclaimer: In order to enhance the vision and usage, we are shadowing our user's interactions. This is solely performed to serve you better
+<img width="1199" alt="Screen Shot 2024-03-24 at 12 09 18 AM" src="https://github.com/zabloncharles/CVWizard/assets/74889517/6c1ed3c5-2224-41a4-b5bc-5a41e063d505">
 
-Learn more about our design in the [*E-Resume — Build a professional resume: Design case study* Medium post.](https://uxplanet.org/e-resume-build-a-professional-resume-design-case-study-3dc02a6359ea)
+## Cover letter and resume
+Tailoring your cover letter and resume is one of the best ways to get more interviews. Look at the job posting to identify what the employer is seeking. Specifically, find important words or phrases to use in your profile and key skills sections. You can get inspiration from Resume Builder's cover letter examples to get expert advice on what you should - and shouldn't - include in your cover letter, such as common key skills and action verbs for your desired job.
+
+
+<img width="1199" alt="Screen Shot 2024-03-24 at 12 09 24 AM" src="https://github.com/zabloncharles/CVWizard/assets/74889517/01ed57b6-93bc-42a0-bf49-48535b045b9b">
+</div>
+
+## Cover letter and resume
+Check out the live link here : [http://www.careerwiz.netlify.app](https://careerwizard.netlify.app)
 
 ## Contributing Guide
 
 If you are interested in contributing (fixing bugs, impoving features, or creating a resume template), please refer to [Contributing Guide](./CONTRIBUTING.md).
 
-## Report Bugs and Feature Requests
-
-File a [bug report](https://github.com/sadanandpai/resume-builder/issues/new?assignees=sadanandpai&labels=&template=bug_report.md&title=) or [feature request](https://github.com/sadanandpai/resume-builder/issues/new?assignees=sadanandpai&labels=&template=feature_request.md&title=) using the [New Issues](https://github.com/sadanandpai/resume-builder/issues/new/choose) page. 
-
-[View all issues.](https://github.com/sadanandpai/resume-builder/issues)
-
-## Core Contributors
-
-<a href="https://github.com/sadanandpai"><img src="https://avatars.githubusercontent.com/u/12962887" alt="sadanand" height="75px" width="75px" /></a> <a href="https://github.com/gopal1996"><img src="https://avatars.githubusercontent.com/u/22369081" alt="sadanand" height="75px" width="75px" /></a> <a href="https://github.com/yakshaG"><img src="https://avatars.githubusercontent.com/u/26523871" alt="sadanand" height="75px" width="75px" /></a> <a href="https://github.com/siva-kannan3"><img src="https://avatars.githubusercontent.com/u/60533560" alt="sadanand" height="75px" width="75px" /></a>
+## About the Author
+made with love 💖 by @zabloncharles
 
 ## License
 
 This repository is [MIT licensed](./LICENSE).
+
