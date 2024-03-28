@@ -142,7 +142,7 @@ const Navbar = styled.div`
   // Your styles here
 
   backdrop-filter: blur(44px);
-  background-color: #000000b4;
+  background-color: #00000000;
   display: flex;
   -webkit-box-pack: justify;
   justify-content: space-between;
@@ -161,16 +161,14 @@ const Navbar = styled.div`
     background-repeat: no-repeat;
   }
   @media screen and (min-width: 1000px) {
-    top: 21px;
     color: white;
     font-size: 25px;
     border: 1px solid rgb(24, 24, 25);
-    margin: 0 10px;
-
+    margin: 0;
+    background-color: black;
     padding: 20px 20px;
     left: 0;
     right: 0;
-    border-radius: 60px;
     overflow: hidden;
     -webkit-box-align: center;
     align-items: center;
