@@ -18,7 +18,7 @@ const Education: React.FC<IEducationProps> = ({ educationInfo, currentIndex }) =
       const currentExpInfo = { ...educationInfo };
       switch (name) {
         case 'academyName':
-          currentExpInfo.institution = value;
+          currentExpInfo.institution = value.trim();
           break;
         case 'degree':
           currentExpInfo.studyType = value;
@@ -42,7 +42,6 @@ const Education: React.FC<IEducationProps> = ({ educationInfo, currentIndex }) =
             currentExpInfo.endDate = value;
           }
           break;
-
         default:
           break;
       }
@@ -54,7 +53,7 @@ const Education: React.FC<IEducationProps> = ({ educationInfo, currentIndex }) =
   return (
     <Fragment>
       <TextField
-        label="School or College name"
+        label="Institution Name"
         variant="filled"
         value={educationInfo.institution}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +65,7 @@ const Education: React.FC<IEducationProps> = ({ educationInfo, currentIndex }) =
         required
         autoFocus={true}
         sx={{ marginBottom: '26px' }}
+        placeholder="e.g. Massachusetts Institute of Technology"
       />
       <TextField
         label="Degree"
@@ -79,9 +79,10 @@ const Education: React.FC<IEducationProps> = ({ educationInfo, currentIndex }) =
         fullWidth
         required
         sx={{ marginBottom: '26px' }}
+        placeholder="e.g. Bachelor of Science"
       />
       <TextField
-        label="Area"
+        label="Field of Study"
         variant="filled"
         value={educationInfo.area}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -92,6 +93,7 @@ const Education: React.FC<IEducationProps> = ({ educationInfo, currentIndex }) =
         fullWidth
         required
         sx={{ marginBottom: '26px' }}
+        placeholder="e.g. Computer Science"
       />
       <TextField
         label="Grade"
@@ -103,8 +105,8 @@ const Education: React.FC<IEducationProps> = ({ educationInfo, currentIndex }) =
         }}
         autoComplete="off"
         fullWidth
-        required
         sx={{ marginBottom: '26px' }}
+        placeholder="e.g. 3.8/4.0"
       />
       <DatePicker
         label="Start date"

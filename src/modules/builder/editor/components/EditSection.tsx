@@ -17,13 +17,19 @@ interface IEditSection {
 const EditSection = ({ section, onLinkClick }: IEditSection) => {
   return (
     <motion.div initial={animation.initial} animate={animation.animate}>
-      <div>
-        <a className="flex items-center mb-6 mt-4 cursor-pointer" onClick={() => onLinkClick('')}>
+      <div className="flex items-center mb-6">
+        <button
+          onClick={() => onLinkClick('')}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/50 hover:bg-white/70 transition-all"
+        >
           <Image src="/icons/left-arrow.svg" alt="back" width={12} height={16} />
-          <span className="pl-2 ml-2 text-2xl font-bold">{section.title}</span>
-        </a>
+          <span className="text-gray-700 font-medium">Back</span>
+        </button>
+        <h1 className="text-2xl font-semibold text-gray-800 ml-4">{section.title}</h1>
       </div>
-      <section.component />
+      <div className="bg-white/50 backdrop-blur-sm rounded-xl p-6">
+        <section.component />
+      </div>
     </motion.div>
   );
 };

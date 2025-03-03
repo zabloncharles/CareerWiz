@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import { StyledButton } from '../atoms';
+import Image from 'next/image';
 
 export const PrintResume = () => {
   useEffect(() => {
@@ -14,8 +15,16 @@ export const PrintResume = () => {
   }, []);
 
   return (
-    <StyledButton onClick={globalThis?.print} variant="outlined">
-      Download as PDF
+    <StyledButton
+      variant="text"
+      onClick={() => {
+        window.print();
+      }}
+      startIcon={
+        <Image src="/icons/print.svg" alt="Print" width="20" height="20" className="invert" />
+      }
+    >
+      Print
     </StyledButton>
   );
 };

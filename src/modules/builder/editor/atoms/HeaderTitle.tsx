@@ -1,13 +1,20 @@
 import Image from 'next/image';
 
-const HeaderTitle = ({ title }: { title: string }) => (
-  <div className="flex items-center my-5 cursor-pointer">
-    <p className="text-xl ml-2">{title}</p>
-
-    <div className="ml-auto pl-4 flex items-center">
-      <Image src="/icons/right-arrow.svg" alt="right-arrow" height="16" width="16" />
-    </div>
-  </div>
-);
+const HeaderTitle = ({ title }: { title: string }) => {
+  return (
+    <h2 className="text-xl font-medium text-white/90 hover:text-white transition-colors cursor-pointer py-2 flex items-center justify-between group">
+      {title}
+      <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+        <Image
+          src="/icons/right-arrow.svg"
+          alt="right arrow"
+          width={16}
+          height={16}
+          className="invert opacity-70"
+        />
+      </div>
+    </h2>
+  );
+};
 
 export default HeaderTitle;

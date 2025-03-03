@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { NavMenuPopover } from './NavMenuPopover';
 import { StyledButton } from '../atoms';
 
-export const NavMenuItem = ({ caption, popoverChildren }: INavMenuItemProps) => {
+export const NavMenuItem = ({ caption, popoverChildren, icon }: INavMenuItemProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -22,6 +22,7 @@ export const NavMenuItem = ({ caption, popoverChildren }: INavMenuItemProps) => 
         variant="text"
         onClick={handleClick}
         aria-describedby={'mark'}
+        startIcon={icon}
         endIcon={
           <Image
             src={'/icons/dropdown-arrow.svg'}

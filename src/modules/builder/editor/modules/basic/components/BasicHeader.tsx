@@ -12,17 +12,30 @@ const BasicHeader = ({
   tabTitles: string[];
 }) => {
   return (
-    <Tabs value={activeTab} onChange={changeActiveTab} variant="fullWidth">
+    <Tabs
+      value={activeTab}
+      onChange={changeActiveTab}
+      variant="fullWidth"
+      sx={{
+        '& .MuiTab-root': {
+          color: 'rgba(255, 255, 255, 0.7)',
+          textTransform: 'none',
+          fontSize: '1rem',
+          fontWeight: 500,
+          '&.Mui-selected': {
+            color: 'rgba(255, 255, 255, 0.95)',
+          },
+          '&:hover': {
+            color: 'rgba(255, 255, 255, 0.85)',
+          },
+        },
+        '& .MuiTabs-indicator': {
+          backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        },
+      }}
+    >
       {tabTitles.map((title: string, index: number) => (
-        <Tab
-          key={index}
-          label={title}
-          sx={{
-            color: 'rgb(46 64 82)',
-            textTransform: 'none',
-            fontSize: '1rem',
-          }}
-        />
+        <Tab key={index} label={title} />
       ))}
     </Tabs>
   );

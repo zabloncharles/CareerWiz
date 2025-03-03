@@ -70,6 +70,9 @@ const Links = ({
 
   useEffect(() => {
     const defaultNetworks = { ...SUPPORTED_NETWORK_DEFAULT_STATE };
+    if (!basicTabs.profiles) {
+      basicTabs.profiles = [];
+    }
     Object.keys(SUPPORTED_NETWORKS).forEach((ntwk) => {
       const matchedNetwork = basicTabs.profiles.find(
         (profile: IProfileNetwork) => profile.network === ntwk
@@ -84,9 +87,20 @@ const Links = ({
   }, []);
 
   const onURLChange = (value: string, network: string) => {
+    if (!basicTabs.profiles) {
+      basicTabs.profiles = [];
+    }
     const profiles = basicTabs.profiles;
     const matchedNetwork = profiles.find((profile: IProfileNetwork) => profile.network === network);
-    matchedNetwork.url = value;
+    if (matchedNetwork) {
+      matchedNetwork.url = value;
+    } else {
+      profiles.push({
+        network,
+        username: 'janedoe',
+        url: value,
+      });
+    }
     onChangeHandler(profiles, 'profiles');
   };
 

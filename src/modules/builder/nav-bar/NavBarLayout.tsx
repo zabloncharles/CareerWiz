@@ -17,7 +17,6 @@ import Link from 'next/link';
 import { NavMenuItem } from './components/MenuItem';
 import { PrintResume } from './components/PrintResume';
 import { TemplateSelect } from './components/TemplateSelect';
-import { ThemeSelect } from './components/ThemeSelect';
 import { Toast } from 'src/helpers/common/atoms/Toast';
 import exportFromJSON from 'export-from-json';
 import { useActivity } from 'src/stores/activity';
@@ -26,6 +25,7 @@ import { useBasicDetails } from 'src/stores/basic';
 import { useEducations } from 'src/stores/education';
 import { useExperiences } from 'src/stores/experience';
 import { useVoluteeringStore } from 'src/stores/volunteering';
+import { motion } from 'framer-motion';
 
 const TOTAL_TEMPLATES_AVAILABLE = Object.keys(AVAILABLE_TEMPLATES).length;
 
@@ -119,32 +119,71 @@ const NavBarLayout = () => {
   }, []);
 
   return (
-    <nav className="h-14 w-full bg-resume-800 relative flex py-2.5 pl-5 pr-4 items-center shadow-level-8dp z-20 print:hidden">
-      <Link href="/">
-        <Image src={'/icons/resume-icon.png'} alt="logo" height="36" width="36" />
+    <motion.nav
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="h-16 w-full bg-[#0f1629]/90 backdrop-blur-xl border-b border-white/10 relative flex items-center px-6 shadow-2xl z-20 print:hidden"
+    >
+      <Link
+        href="/"
+        className="text-white text-xl font-bold tracking-wide hover:text-white/80 transition-colors flex items-center gap-3"
+      >
+        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+          <span className="text-white text-sm font-bold">CV</span>
+        </div>
+        CVstudio
       </Link>
-      <div className="flex-auto flex justify-between items-center ml-5">
+
+      <div className="flex-auto flex justify-between items-center ml-8">
         <NavBarMenu>
           <NavMenuItem
             caption={`Templates (${TOTAL_TEMPLATES_AVAILABLE})`}
             popoverChildren={<TemplateSelect />}
+            icon={
+              <Image
+                src="/icons/template.svg"
+                alt="Templates"
+                width="20"
+                height="20"
+                className="invert opacity-80"
+              />
+            }
           />
-          <NavMenuItem caption="Colours" popoverChildren={<ThemeSelect />} />
         </NavBarMenu>
+
         <NavBarActions>
-          <StyledButton variant="text" onClick={exportResumeData}>
-            Export
-          </StyledButton>
-          <StyledButton
-            variant="text"
+          <button
+            onClick={exportResumeData}
+            className="flex items-center gap-2 px-4 py-2 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+          >
+            <Image
+              src="/icons/export.svg"
+              alt="Export"
+              width="18"
+              height="18"
+              className="invert opacity-80"
+            />
+            <span className="text-sm font-medium">Export</span>
+          </button>
+
+          <button
             onClick={() => {
               if (fileInputRef.current) {
                 const fileElement = fileInputRef.current as HTMLInputElement;
                 fileElement.click();
               }
             }}
+            className="flex items-center gap-2 px-4 py-2 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/5"
           >
-            Import{' '}
+            <Image
+              src="/icons/import.svg"
+              alt="Import"
+              width="18"
+              height="18"
+              className="invert opacity-80"
+            />
+            <span className="text-sm font-medium">Import</span>
             <input
               type="file"
               hidden
@@ -152,10 +191,12 @@ const NavBarLayout = () => {
               accept="application/json"
               onChange={handleFileChange}
             />
-          </StyledButton>
+          </button>
+
           <PrintResume />
         </NavBarActions>
       </div>
+
       <Toast
         open={openToast}
         onClose={() => {
@@ -163,7 +204,7 @@ const NavBarLayout = () => {
         }}
         content={'Resume data was successfully imported.'}
       />
-    </nav>
+    </motion.nav>
   );
 };
 

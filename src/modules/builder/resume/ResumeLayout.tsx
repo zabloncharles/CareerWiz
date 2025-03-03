@@ -30,12 +30,17 @@ export const ResumeLayout = () => {
     <div className="mx-5 print:mx-0 mb-2 print:mb-0">
       <div
         style={{ transform: `scale(${zoom})` }}
-        className="origin-top transition-all duration-300 ease-linear	print:!scale-100"
+        className="origin-top transition-all duration-300 ease-linear print:!scale-100"
       >
-        <div className="w-[210mm] h-[296mm] bg-white my-0 mx-auto">
-          <StateContext.Provider value={resumeData}>
-            <ThemeProvider theme={selectedTheme}>{Template && <Template />}</ThemeProvider>
-          </StateContext.Provider>
+        <div
+          className="w-[210mm] min-h-[297mm] bg-white text-gray-800 shadow-sm ring-1 ring-gray-100 print:shadow-none print:ring-0 font-sans"
+          style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
+        >
+          <div className="px-8 pb-8">
+            <StateContext.Provider value={resumeData}>
+              <ThemeProvider theme={selectedTheme}>{Template && <Template />}</ThemeProvider>
+            </StateContext.Provider>
+          </div>
         </div>
       </div>
     </div>

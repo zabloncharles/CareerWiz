@@ -24,10 +24,25 @@ const BasicPanel = ({
       <Box
         component="form"
         sx={{
-          '& > :not(style)': { margin: '0.5rem 0' },
-          backgroundColor: 'rgb(231 238 250)',
+          '& > :not(style)': { margin: '0.75rem 0' },
+          backgroundColor: 'rgba(255, 255, 255, 0.7)',
+          backdropFilter: 'blur(12px)',
           display: 'flex',
           flexDirection: 'column',
+          padding: '1.5rem',
+          borderRadius: '1rem',
+          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+          '& .MuiTextField-root': {
+            '& .MuiFilledInput-root': {
+              backgroundColor: 'rgba(255, 255, 255, 0.8)',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              },
+              '&.Mui-focused': {
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              },
+            },
+          },
         }}
         noValidate
         autoComplete="off"

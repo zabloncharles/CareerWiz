@@ -25,9 +25,22 @@ export const WorkSection = ({ experience }: { experience: IWorkIntrf[] }) => {
               </div>
             </div>
 
-            <SectionList>
-              <HTMLRenderer htmlString={item.summary} />
-            </SectionList>
+            {item.summary && (
+              <div className="mt-2 text-sm text-gray-600">
+                <HTMLRenderer htmlString={item.summary} />
+              </div>
+            )}
+
+            {item.highlights && item.highlights.length > 0 && (
+              <div className="mt-2 space-y-1">
+                {item.highlights.map((highlight: string, index: number) => (
+                  <div key={index} className="flex items-start gap-2 text-sm text-gray-600">
+                    <span className="text-gray-400 mt-1.5">•</span>
+                    <span className="flex-1">{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         );
       })}

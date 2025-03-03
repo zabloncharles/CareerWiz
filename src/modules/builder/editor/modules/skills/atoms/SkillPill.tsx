@@ -39,7 +39,7 @@ const SkillPill = ({
       key={name}
     >
       <div
-        className="bg-custom-grey flex items-center pl-4 pr-2 py-2 rounded-full text-sm cursor-default"
+        className="bg-custom-grey flex items-center pl-4 pr-2 py-2 rounded-full text-sm cursor-default text-gray-800"
         data-testid="skill-pill"
         style={style}
         ref={setNodeRef}

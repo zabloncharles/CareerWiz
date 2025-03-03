@@ -585,7 +585,6 @@ const MainContainer = styled.div`
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-  background: #0f1629;
 `;
 
 const WavePattern = styled.div`

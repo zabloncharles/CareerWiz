@@ -25,24 +25,26 @@ export const SYSTEM_COLORS: IThemeColor[] = [
   },
 ];
 
-export const AVAILABLE_TEMPLATES: ITemplate = {
+const MordernTemplate = dynamic(() => import('src/templates/modern/MordernTemplate'), {
+  ssr: false,
+});
+
+const MinimalTemplate = dynamic(() => import('src/templates/minimal/MinimalTemplate'), {
+  ssr: false,
+});
+
+export const AVAILABLE_TEMPLATES = {
   modern: {
     id: 'modern',
-    name: 'Modern Resume',
-    thumbnail: '/templates/modern.png',
-    component: dynamic(() => import('src/templates/modern/MordernTemplate'), {
-      ssr: false,
-    }),
+    name: 'Modern',
+    component: MordernTemplate,
   },
-  professional: {
-    id: 'professional',
-    name: 'Professional Resume',
-    thumbnail: '/templates/professional.png',
-    component: dynamic(() => import('src/templates/professional/ProfessionalTemplate'), {
-      ssr: false,
-    }),
+  minimal: {
+    id: 'minimal',
+    name: 'Minimal',
+    component: MinimalTemplate,
   },
-};
+} as const;
 
 export const CUSTOM_THEME_COLOR: IThemeColor = {
   backgroundColor: 'white',

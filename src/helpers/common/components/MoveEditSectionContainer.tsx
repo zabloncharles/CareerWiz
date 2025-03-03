@@ -35,7 +35,7 @@ const MoveEditSection = ({
   return (
     <div className="shadow-sm rounded-lg">
       <div
-        className={`bg-resume-100 shadow-sm h-12 w-full ${
+        className={`bg-white shadow-sm h-12 w-full ${
           expanded ? `rounded-t-lg` : `rounded-lg`
         } relative flex items-center justify-between pl-4 pr-5 text-resume-800 font-bold text-lg select-none cursor-pointer z-10`}
         onClick={clickHandler}
@@ -83,7 +83,7 @@ const MoveEditSection = ({
       <AnimatePresence>
         {expanded && (
           <motion.div
-            className={`bg-resume-10 relative rounded-b-lg px-4 pt-6 pb-2 overflow-hidden`}
+            className={`bg-white relative rounded-b-lg px-4 pt-6 pb-2 overflow-hidden`}
             exit={animation.exit}
           >
             {children}
