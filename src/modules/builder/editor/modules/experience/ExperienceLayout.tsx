@@ -1,46 +1,50 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { useExperiences } from 'src/stores/experience';
-import AddExperience from './components/AddExperience';
 import Experience from './components/Experience';
-
-import MoveEditSection from 'src/helpers/common/components/MoveEditSectionContainer';
+import { Box, IconButton } from '@mui/material';
+import { MdDelete, MdArrowUpward, MdArrowDownward } from 'react-icons/md';
 
 const ExperienceLayout = () => {
   const allWorks = useExperiences((state) => state.experiences);
-  const removeExperience = useExperiences.getState().remove;
-  const onMoveUp = useExperiences.getState().onmoveup;
-  const onMoveDown = useExperiences.getState().onmovedown;
-
-  const [expanded, setExpanded] = useState<string | false>(false);
-
-  useEffect(() => {
-    setExpanded(allWorks[0]?.id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleChange = (panel: string, isExpanded: boolean) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+  const removeExperience = useExperiences((state) => state.remove);
+  const onMoveUp = useExperiences((state) => state.onmoveup);
+  const onMoveDown = useExperiences((state) => state.onmovedown);
 
   return (
-    <div className="flex flex-col gap-8 mb-8">
+    <Box className="space-y-8">
       {allWorks.map((work, index) => (
-        <MoveEditSection
-          key={work.id}
-          title={work.name || 'Experience'}
-          expanded={expanded === work.id}
-          length={allWorks.length}
-          index={index}
-          clickHandler={() => handleChange(work.id, expanded !== work.id)}
-          onMoveUp={onMoveUp}
-          onMoveDown={onMoveDown}
-          onDelete={removeExperience}
-        >
-          <Experience experienceInfo={work} currentIndex={index} />
-        </MoveEditSection>
+        <Box key={index} className="relative p-6 bg-white/5 rounded-lg">
+          <div className="absolute right-4 top-4 flex gap-2">
+            {index > 0 && (
+              <IconButton
+                size="small"
+                onClick={() => onMoveUp(index)}
+                className="text-gray-400 hover:text-white"
+              >
+                <MdArrowUpward />
+              </IconButton>
+            )}
+            {index < allWorks.length - 1 && (
+              <IconButton
+                size="small"
+                onClick={() => onMoveDown(index)}
+                className="text-gray-400 hover:text-white"
+              >
+                <MdArrowDownward />
+              </IconButton>
+            )}
+            <IconButton
+              size="small"
+              onClick={() => removeExperience(index)}
+              className="text-gray-400 hover:text-red-500"
+            >
+              <MdDelete />
+            </IconButton>
+          </div>
+          <Experience experienceInfo={work} index={index} />
+        </Box>
       ))}
-      <AddExperience handleChange={handleChange} isEmpty={allWorks.length === 0} />
-    </div>
+    </Box>
   );
 };
 

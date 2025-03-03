@@ -10,54 +10,38 @@ import Image from 'next/image';
 import { useTemplates } from 'src/stores/useTemplate';
 import { useResumeStore } from 'src/stores/useResumeStore';
 import { motion } from 'framer-motion';
+import React from 'react';
+import { Box, IconButton } from '@mui/material';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 export const TemplateSlider = () => {
-  const templateIndex = useTemplates((state) => state.activeTemplate.id);
+  const activeTemplate = useTemplates((state) => state.activeTemplate);
+  const setTemplate = useTemplates((state) => state.setTemplate);
+  const templates = Object.entries(AVAILABLE_TEMPLATES);
+  const currentIndex = templates.findIndex(([id]) => id === activeTemplate.id);
 
-  const onChangeTemplate = (templateId: string) => {
-    useTemplates.getState().setTemplate(AVAILABLE_TEMPLATES[templateId]);
+  const handlePrevious = () => {
+    const newIndex = (currentIndex - 1 + templates.length) % templates.length;
+    const [id] = templates[newIndex];
+    setTemplate(AVAILABLE_TEMPLATES[id]);
+  };
+
+  const handleNext = () => {
+    const newIndex = (currentIndex + 1) % templates.length;
+    const [id] = templates[newIndex];
+    setTemplate(AVAILABLE_TEMPLATES[id]);
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4">
-      {Object.entries(AVAILABLE_TEMPLATES).map(([name, template]) => (
-        <motion.div
-          key={name}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className={`relative rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
-            template.id === templateIndex
-              ? 'border-blue-500 shadow-lg scale-[1.02]'
-              : 'border-white/10 hover:border-white/20'
-          }`}
-          onClick={() => onChangeTemplate(name)}
-        >
-          <div className="w-full h-full bg-[#232452] p-3">
-            <Image
-              src={template.thumbnail}
-              alt={name}
-              width={200}
-              height={283}
-              className="w-full h-auto rounded-lg shadow-lg"
-            />
-          </div>
-          {template.id === templateIndex && (
-            <div className="absolute top-2 right-2 bg-blue-500 text-white p-1 rounded-full shadow-lg">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          )}
-        </motion.div>
-      ))}
-    </div>
+    <Box className="flex items-center gap-4">
+      <IconButton onClick={handlePrevious} className="text-gray-400 hover:text-white">
+        <MdChevronLeft />
+      </IconButton>
+      <span className="text-white/90">{activeTemplate.name}</span>
+      <IconButton onClick={handleNext} className="text-gray-400 hover:text-white">
+        <MdChevronRight />
+      </IconButton>
+    </Box>
   );
 };
 

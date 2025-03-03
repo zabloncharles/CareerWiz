@@ -33,7 +33,7 @@ export const ResumeLayout = () => {
         className="origin-top transition-all duration-300 ease-linear print:!scale-100"
       >
         <div
-          className="w-[210mm] min-h-[297mm] bg-white text-gray-800 shadow-sm ring-1 ring-gray-100 print:shadow-none print:ring-0 font-sans"
+          className="w-[210mm] min-h-[297mm] bg-[#232452] text-white/90 shadow-sm ring-1 ring-white/10 print:shadow-none print:ring-0 font-sans"
           style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
         >
           <div className="px-8 pb-8">

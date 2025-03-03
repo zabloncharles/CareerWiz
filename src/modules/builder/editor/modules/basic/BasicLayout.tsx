@@ -8,7 +8,7 @@ const tabTitles = ['Contacts', 'Links', 'About'];
 const BasicLayout = () => {
   const [activeTab, setActiveTab] = React.useState(0);
   const basicTabs = useBasicDetails((state) => state.values);
-  const onChangeText = useBasicDetails.getState().reset;
+  const reset = useBasicDetails((state) => state.reset);
 
   const changeActiveTab = (event: React.SyntheticEvent, activeTab: number) => {
     setActiveTab(activeTab);
@@ -21,11 +21,7 @@ const BasicLayout = () => {
         changeActiveTab={changeActiveTab}
         tabTitles={tabTitles}
       ></BasicHeader>
-      <BasicPanel
-        activeTab={activeTab}
-        basicTabs={basicTabs}
-        onChangeText={onChangeText}
-      ></BasicPanel>
+      <BasicPanel activeTab={activeTab} basicTabs={basicTabs} onChangeText={reset}></BasicPanel>
     </Fragment>
   );
 };

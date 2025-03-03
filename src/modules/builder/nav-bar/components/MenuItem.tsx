@@ -1,43 +1,15 @@
-import { Fragment, useState } from 'react';
-
+import React from 'react';
 import { INavMenuItemProps } from './MenuItem.interface';
-import Image from 'next/image';
-import { NavMenuPopover } from './NavMenuPopover';
-import { StyledButton } from '../atoms';
 
-export const NavMenuItem = ({ caption, popoverChildren, icon }: INavMenuItemProps) => {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
+export const NavMenuItem = ({ caption, onClick, icon, popoverChildren }: INavMenuItemProps) => {
   return (
-    <Fragment>
-      <StyledButton
-        variant="text"
-        onClick={handleClick}
-        aria-describedby={'mark'}
-        startIcon={icon}
-        endIcon={
-          <Image
-            src={'/icons/dropdown-arrow.svg'}
-            alt="dropdown-arrow"
-            width="20"
-            height="20"
-            className={`${anchorEl ? 'scale-y-[-1]' : ''}`}
-          />
-        }
-      >
-        {caption}
-      </StyledButton>
-      <NavMenuPopover isOpen={!!anchorEl} anchorElement={anchorEl} id="mark" onClose={handleClose}>
-        {popoverChildren}
-      </NavMenuPopover>
-    </Fragment>
+    <button
+      onClick={onClick}
+      className="flex items-center gap-2 px-4 py-2 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+    >
+      {icon}
+      <span className="text-sm font-medium">{caption}</span>
+      {popoverChildren}
+    </button>
   );
 };

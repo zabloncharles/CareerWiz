@@ -1,5 +1,8 @@
+import { ReactNode } from 'react';
+
 export interface INavMenuItemProps {
   caption: string;
-  popoverChildren: React.ReactNode;
-  icon?: React.ReactNode;
+  onClick?: () => void;
+  icon?: ReactNode;
+  popoverChildren?: ReactNode;
 }

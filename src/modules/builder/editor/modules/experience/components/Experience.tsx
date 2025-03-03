@@ -1,23 +1,28 @@
 import React, { ChangeEvent, Fragment, useCallback } from 'react';
 import TextField from '@mui/material/TextField';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs from 'dayjs';
 
 import { useExperiences } from 'src/stores/experience';
 import { IExperienceItem } from 'src/stores/experience.interface';
 import { SwitchWidget } from 'src/helpers/common/atoms/Switch';
 import { RichtextEditor } from 'src/helpers/common/components/richtext';
 import { DATE_PICKER_FORMAT } from 'src/helpers/constants';
+import { Box } from '@mui/material';
 
-interface IExperienceProps {
+interface ExperienceProps {
   experienceInfo: IExperienceItem;
-  currentIndex: number;
+  index: number;
 }
 
-const Experience: React.FC<IExperienceProps> = ({ experienceInfo, currentIndex }) => {
+const Experience: React.FC<ExperienceProps> = ({ experienceInfo, index }) => {
+  const updateExperience = useExperiences((state) => state.updateExperience);
+
   const onChangeHandler = useCallback(
     (name: string, value: any) => {
       const currentExpInfo = { ...experienceInfo };
-      const updateExperience = useExperiences.getState().updateExperience;
       switch (name) {
         case 'companyName':
           currentExpInfo.name = value;
@@ -47,9 +52,9 @@ const Experience: React.FC<IExperienceProps> = ({ experienceInfo, currentIndex }
         default:
           break;
       }
-      updateExperience(currentIndex, currentExpInfo);
+      updateExperience(index, currentExpInfo);
     },
-    [currentIndex, experienceInfo]
+    [index, experienceInfo]
   );
 
   const onSummaryChange = useCallback(
@@ -60,70 +65,42 @@ const Experience: React.FC<IExperienceProps> = ({ experienceInfo, currentIndex }
   );
 
   return (
-    <Fragment>
+    <Box className="space-y-6">
       <TextField
-        label="Comapany name"
+        fullWidth
+        label="Company Name"
         variant="filled"
         value={experienceInfo.name}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          const value = e.target.value;
-          onChangeHandler('companyName', value);
-        }}
-        autoComplete="off"
-        fullWidth
-        required
-        autoFocus={true}
-        sx={{ marginBottom: '26px' }}
+        onChange={(e) => onChangeHandler('companyName', e.target.value)}
       />
       <TextField
+        fullWidth
         label="Position"
         variant="filled"
         value={experienceInfo.position}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          const value = e.target.value;
-          onChangeHandler('position', value);
-        }}
-        autoComplete="off"
-        fullWidth
-        required
-        sx={{ marginBottom: '26px' }}
+        onChange={(e) => onChangeHandler('position', e.target.value)}
       />
-      <DatePicker
-        label="Start date"
-        value={experienceInfo.startDate}
-        onChange={(newDate) => {
-          onChangeHandler('startDate', newDate);
-        }}
-        inputFormat={DATE_PICKER_FORMAT}
-        renderInput={(params) => (
-          <TextField {...params} variant="filled" autoComplete="off" fullWidth required />
-        )}
-      />
-      <SwitchWidget
-        label={'I currently work here'}
-        value={experienceInfo.isWorkingHere ?? false}
-        onChange={(newValue: boolean) => {
-          onChangeHandler('isWorkingHere', newValue);
-        }}
-      />
-      <DatePicker
-        label="End date"
-        value={experienceInfo.isWorkingHere ? null : experienceInfo.endDate}
-        onChange={(newDate) => {
-          onChangeHandler('endDate', newDate);
-        }}
-        inputFormat={DATE_PICKER_FORMAT}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="filled"
-            autoComplete="off"
-            fullWidth
-            required
-            sx={{ marginBottom: '26px' }}
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <div className="grid grid-cols-2 gap-4">
+          <DatePicker
+            label="Start Date"
+            value={dayjs(experienceInfo.startDate)}
+            onChange={(value) => onChangeHandler('startDate', value)}
+            renderInput={(params) => <TextField {...params} variant="filled" fullWidth />}
           />
-        )}
-        disabled={experienceInfo.isWorkingHere}
+          <DatePicker
+            label="End Date"
+            value={experienceInfo.isWorkingHere ? null : dayjs(experienceInfo.endDate)}
+            onChange={(value) => onChangeHandler('endDate', value)}
+            renderInput={(params) => <TextField {...params} variant="filled" fullWidth />}
+            disabled={experienceInfo.isWorkingHere}
+          />
+        </div>
+      </LocalizationProvider>
+      <SwitchWidget
+        label="I currently work here"
+        value={experienceInfo.isWorkingHere}
+        onChange={(newValue) => onChangeHandler('isWorkingHere', newValue)}
       />
       <TextField
         label="Years"
@@ -143,7 +120,7 @@ const Experience: React.FC<IExperienceProps> = ({ experienceInfo, currentIndex }
         onChange={onSummaryChange}
         name="summary"
       />
-    </Fragment>
+    </Box>
   );
 };
 

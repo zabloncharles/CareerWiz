@@ -48,5 +48,4 @@ const ActivitiesLayout = () => {
     </Fragment>
   );
 };
-
 export default ActivitiesLayout;

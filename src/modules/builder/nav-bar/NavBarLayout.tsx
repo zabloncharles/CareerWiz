@@ -1,210 +1,149 @@
-import { ChangeEvent, useCallback, useRef, useState } from 'react';
-import { NavBarActions, NavBarMenu, StyledButton } from './atoms';
-import {
-  useDatabases,
-  useFrameworks,
-  useLanguages,
-  useLibraries,
-  usePractices,
-  useTechnologies,
-  useTools,
-} from 'src/stores/skills';
-
-import { AVAILABLE_TEMPLATES } from 'src/helpers/constants';
-import DEFAULT_RESUME_JSON from 'src/helpers/constants/resume-data.json';
-import Image from 'next/image';
-import Link from 'next/link';
+import React, { useState } from 'react';
+import { Box, IconButton } from '@mui/material';
+import { MdMenu, MdClose } from 'react-icons/md';
 import { NavMenuItem } from './components/MenuItem';
 import { PrintResume } from './components/PrintResume';
-import { TemplateSelect } from './components/TemplateSelect';
+import TemplateSelect from './components/TemplateSelect';
 import { Toast } from 'src/helpers/common/atoms/Toast';
 import exportFromJSON from 'export-from-json';
 import { useActivity } from 'src/stores/activity';
-import { useAwards } from 'src/stores/awards';
 import { useBasicDetails } from 'src/stores/basic';
-import { useEducations } from 'src/stores/education';
 import { useExperiences } from 'src/stores/experience';
+import { useEducations } from 'src/stores/education';
 import { useVoluteeringStore } from 'src/stores/volunteering';
-import { motion } from 'framer-motion';
-
-const TOTAL_TEMPLATES_AVAILABLE = Object.keys(AVAILABLE_TEMPLATES).length;
+import { useAwards } from 'src/stores/awards';
+import {
+  useLanguages,
+  useFrameworks,
+  useTechnologies,
+  useLibraries,
+  useDatabases,
+  usePractices,
+  useTools,
+} from 'src/stores/skills';
 
 const NavBarLayout = () => {
-  const [openToast, setOpenToast] = useState(false);
-  const fileInputRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
-  const exportResumeData = useCallback(() => {
-    const updatedResumeJson = {
-      ...DEFAULT_RESUME_JSON,
-      basics: {
-        ...DEFAULT_RESUME_JSON.basics,
-        ...useBasicDetails.getState().values,
-      },
-      work: useExperiences.getState().experiences,
-      education: useEducations.getState().academics,
-      awards: useAwards.getState().awards,
-      volunteer: useVoluteeringStore.getState().volunteeredExps,
+  const basicDetails = useBasicDetails((state) => state.values);
+  const experiences = useExperiences((state) => state.experiences);
+  const education = useEducations((state) => state.academics);
+  const volunteering = useVoluteeringStore((state) => state.volunteeredExps);
+  const awards = useAwards((state) => state.awards);
+  const languages = useLanguages((state) => state.values);
+  const frameworks = useFrameworks((state) => state.values);
+  const technologies = useTechnologies((state) => state.values);
+  const libraries = useLibraries((state) => state.values);
+  const databases = useDatabases((state) => state.values);
+  const practices = usePractices((state) => state.values);
+  const tools = useTools((state) => state.values);
+
+  const resetBasic = useBasicDetails((state) => state.reset);
+  const resetExperiences = useExperiences((state) => state.reset);
+  const resetEducation = useEducations((state) => state.reset);
+  const resetVolunteering = useVoluteeringStore((state) => state.reset);
+  const resetAwards = useAwards((state) => state.reset);
+  const resetLanguages = useLanguages((state) => state.reset);
+  const resetFrameworks = useFrameworks((state) => state.reset);
+  const resetTechnologies = useTechnologies((state) => state.reset);
+  const resetLibraries = useLibraries((state) => state.reset);
+  const resetDatabases = useDatabases((state) => state.reset);
+  const resetPractices = usePractices((state) => state.reset);
+  const resetTools = useTools((state) => state.reset);
+
+  const exportData = () => {
+    const data = {
+      basic: basicDetails,
+      experiences,
+      education,
+      volunteering,
+      awards,
       skills: {
-        languages: useLanguages.getState().get(),
-        frameworks: useFrameworks.getState().get(),
-        technologies: useTechnologies.getState().get(),
-        libraries: useLibraries.getState().get(),
-        databases: useDatabases.getState().get(),
-        practices: usePractices.getState().get(),
-        tools: useTools.getState().get(),
+        languages,
+        frameworks,
+        technologies,
+        libraries,
+        databases,
+        practices,
+        tools,
       },
-      activities: useActivity.getState().activities,
     };
-    const fileName = updatedResumeJson.basics.name + '_' + new Date().toLocaleString();
-    const exportType = exportFromJSON.types.json;
     exportFromJSON({
-      data: updatedResumeJson,
-      fileName,
-      exportType,
+      data,
+      fileName: 'resume',
+      exportType: 'json',
     });
-  }, []);
+    setShowToast(true);
+  };
 
-  const handleFileChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const fileObj = event.target.files && event.target.files[0];
-    if (!fileObj) {
-      return;
+  const importData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target?.result as string);
+          resetBasic(data.basic);
+          resetExperiences(data.experiences);
+          resetEducation(data.education);
+          resetVolunteering(data.volunteering);
+          resetAwards(data.awards);
+          resetLanguages(data.skills.languages);
+          resetFrameworks(data.skills.frameworks);
+          resetTechnologies(data.skills.technologies);
+          resetLibraries(data.skills.libraries);
+          resetDatabases(data.skills.databases);
+          resetPractices(data.skills.practices);
+          resetTools(data.skills.tools);
+          setShowToast(true);
+        } catch (error) {
+          console.error('Error importing data:', error);
+        }
+      };
+      reader.readAsText(file);
     }
-
-    const reader = new FileReader();
-
-    reader.readAsText(fileObj);
-
-    event.target.value = ''; // To read the same file
-
-    reader.onload = (e) => {
-      if (typeof e.target?.result === 'string') {
-        const uploadedResumeJSON = JSON.parse(e.target?.result);
-        const {
-          basics = {},
-          skills = {},
-          work = [],
-          education = [],
-          activities = {
-            involvements: '',
-            achievements: '',
-          },
-          volunteer = [],
-          awards = [],
-        } = uploadedResumeJSON;
-        const {
-          languages = [],
-          frameworks = [],
-          libraries = [],
-          databases = [],
-          technologies = [],
-          practices = [],
-          tools = [],
-        } = skills;
-        useBasicDetails.getState().reset(basics);
-        useLanguages.getState().reset(languages);
-        useFrameworks.getState().reset(frameworks);
-        useLibraries.getState().reset(libraries);
-        useDatabases.getState().reset(databases);
-        useTechnologies.getState().reset(technologies);
-        usePractices.getState().reset(practices);
-        useTools.getState().reset(tools);
-        useExperiences.getState().reset(work);
-        useEducations.getState().reset(education);
-        useVoluteeringStore.getState().reset(volunteer);
-        useAwards.getState().reset(awards);
-        useActivity.getState().reset(activities);
-        setOpenToast(true);
-      }
-    };
-  }, []);
+  };
 
   return (
-    <motion.nav
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.3 }}
-      className="h-16 w-full bg-[#0f1629]/90 backdrop-blur-xl border-b border-white/10 relative flex items-center px-6 shadow-2xl z-20 print:hidden"
-    >
-      <Link
-        href="/"
-        className="text-white text-xl font-bold tracking-wide hover:text-white/80 transition-colors flex items-center gap-3"
-      >
-        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
-          <span className="text-white text-sm font-bold">CV</span>
-        </div>
-        CVstudio
-      </Link>
-
-      <div className="flex-auto flex justify-between items-center ml-8">
-        <NavBarMenu>
-          <NavMenuItem
-            caption={`Templates (${TOTAL_TEMPLATES_AVAILABLE})`}
-            popoverChildren={<TemplateSelect />}
-            icon={
-              <Image
-                src="/icons/template.svg"
-                alt="Templates"
-                width="20"
-                height="20"
-                className="invert opacity-80"
+    <Box className="fixed top-0 left-0 w-full z-50">
+      <Box className="bg-[#1A1B3D] shadow-lg">
+        <Box className="container mx-auto px-4">
+          <Box className="flex items-center justify-between h-16">
+            <Box className="flex items-center">
+              <IconButton
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-gray-400 hover:text-white"
+              >
+                {isOpen ? <MdClose /> : <MdMenu />}
+              </IconButton>
+              <span className="ml-4 text-white/90 font-medium">CVstudio</span>
+            </Box>
+            <Box className="flex items-center space-x-4">
+              <TemplateSelect />
+              <PrintResume />
+              <NavMenuItem caption="Export" onClick={exportData} />
+              <NavMenuItem
+                caption="Import"
+                onClick={() => document.getElementById('import-file')?.click()}
               />
-            }
-          />
-        </NavBarMenu>
-
-        <NavBarActions>
-          <button
-            onClick={exportResumeData}
-            className="flex items-center gap-2 px-4 py-2 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/5"
-          >
-            <Image
-              src="/icons/export.svg"
-              alt="Export"
-              width="18"
-              height="18"
-              className="invert opacity-80"
-            />
-            <span className="text-sm font-medium">Export</span>
-          </button>
-
-          <button
-            onClick={() => {
-              if (fileInputRef.current) {
-                const fileElement = fileInputRef.current as HTMLInputElement;
-                fileElement.click();
-              }
-            }}
-            className="flex items-center gap-2 px-4 py-2 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/5"
-          >
-            <Image
-              src="/icons/import.svg"
-              alt="Import"
-              width="18"
-              height="18"
-              className="invert opacity-80"
-            />
-            <span className="text-sm font-medium">Import</span>
-            <input
-              type="file"
-              hidden
-              ref={fileInputRef}
-              accept="application/json"
-              onChange={handleFileChange}
-            />
-          </button>
-
-          <PrintResume />
-        </NavBarActions>
-      </div>
-
+              <input
+                id="import-file"
+                type="file"
+                accept=".json"
+                onChange={importData}
+                className="hidden"
+              />
+            </Box>
+          </Box>
+        </Box>
+      </Box>
       <Toast
-        open={openToast}
-        onClose={() => {
-          setOpenToast(false);
-        }}
-        content={'Resume data was successfully imported.'}
+        open={showToast}
+        onClose={() => setShowToast(false)}
+        content="Operation completed successfully"
       />
-    </motion.nav>
+    </Box>
   );
 };
 

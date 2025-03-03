@@ -1,13 +1,16 @@
-import { MenuItem } from '@mui/material';
-import { AVAILABLE_TEMPLATES } from 'src/helpers/constants';
+import React from 'react';
 import { useTemplates } from 'src/stores/useTemplate';
+import { AVAILABLE_TEMPLATES } from 'src/helpers/constants';
+import { Select, MenuItem, FormControl, InputLabel, SelectChangeEvent } from '@mui/material';
 import { motion } from 'framer-motion';
 
-export const TemplateSelect = () => {
-  const templateId = useTemplates((state) => state.activeTemplate.id);
+const TemplateSelect = () => {
+  const activeTemplate = useTemplates((state) => state.activeTemplate);
+  const setTemplate = useTemplates((state) => state.setTemplate);
 
-  const handleTemplateChange = (newTemplateId: string) => {
-    useTemplates.getState().setTemplate(AVAILABLE_TEMPLATES[newTemplateId]);
+  const handleTemplateChange = (event: SelectChangeEvent) => {
+    const newTemplateId = event.target.value;
+    setTemplate(AVAILABLE_TEMPLATES[newTemplateId]);
   };
 
   return (
@@ -17,32 +20,16 @@ export const TemplateSelect = () => {
       className="w-[300px] bg-[#1A1B3D] rounded-lg border border-white/10 shadow-2xl overflow-hidden backdrop-blur-xl"
     >
       <div className="max-h-[400px] overflow-y-auto custom-scrollbar">
-        {Object.entries(AVAILABLE_TEMPLATES).map(([id, template]) => (
-          <div
-            key={id}
-            onClick={() => handleTemplateChange(id)}
-            className={`px-4 py-3 cursor-pointer transition-colors duration-200 flex items-center justify-between ${
-              id === templateId ? 'bg-white/10' : 'hover:bg-white/5'
-            }`}
-          >
-            <span className="text-white/90">{template.name}</span>
-            {id === templateId && (
-              <svg
-                className="w-5 h-5 text-white/70"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            )}
-          </div>
-        ))}
+        <FormControl variant="filled" fullWidth>
+          <InputLabel>Template</InputLabel>
+          <Select value={activeTemplate.id || ''} onChange={handleTemplateChange}>
+            {Object.entries(AVAILABLE_TEMPLATES).map(([id, template]) => (
+              <MenuItem key={id} value={id}>
+                {template.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </div>
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
@@ -63,3 +50,5 @@ export const TemplateSelect = () => {
     </motion.div>
   );
 };
+
+export default TemplateSelect;

@@ -1,18 +1,19 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Box } from '@mui/material';
 import {
-  useDatabases,
-  useFrameworks,
   useLanguages,
-  useLibraries,
-  usePractices,
+  useFrameworks,
   useTechnologies,
+  useLibraries,
+  useDatabases,
+  usePractices,
   useTools,
 } from 'src/stores/skills';
-import EditSectionContainer from 'src/helpers/common/components/EditSectionContainer';
 import Skill from './components/Skill';
 
 const SkillsLayout = () => {
-  const skillState = [
+  const [expanded, setExpanded] = useState<string | false>(false);
+  const skillStores = [
     useLanguages(),
     useFrameworks(),
     useTechnologies(),
@@ -22,33 +23,24 @@ const SkillsLayout = () => {
     useTools(),
   ];
 
-  const [expanded, setExpanded] = useState<string | false>('Languages');
-
   const handleChange = (panel: string, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   return (
-    <div className="flex flex-col gap-8 mb-8">
-      {skillState.map((state) => (
-        <EditSectionContainer
-          key={state.title}
-          title={state.title}
-          expanded={expanded === state.title}
-          isEnabled={state.isEnabled}
-          setIsEnabled={state.setIsEnabled}
-          clickHandler={() => handleChange(state.title, expanded !== state.title)}
-        >
+    <Box className="space-y-6">
+      {skillStores.map((store) => (
+        <Box key={store.title} className="bg-white/5 rounded-lg p-6">
           <Skill
-            items={state.values}
-            addItem={state.add}
-            removeItem={state.remove}
-            setItems={state.reset}
-            hasLevel={state.hasLevel}
+            items={store.values}
+            addItem={store.add}
+            removeItem={store.remove}
+            setItems={store.reset}
+            hasLevel={store.hasLevel}
           />
-        </EditSectionContainer>
+        </Box>
       ))}
-    </div>
+    </Box>
   );
 };
 
