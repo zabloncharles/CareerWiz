@@ -66,7 +66,7 @@ const HomeLayout = () => {
       role: 'Software Engineer',
       company: 'Google',
       image: '/avatars/avatar1.jpg',
-      text: 'CareerCraft helped me land my dream job at Google. The AI-powered suggestions were incredibly helpful!',
+      text: 'CVstudio helped me land my dream job at Google. The AI-powered suggestions were incredibly helpful!',
     },
     {
       name: 'Michael Chen',
@@ -104,8 +104,11 @@ const HomeLayout = () => {
           <Navbar>
             <NavContainer>
               <div className="flex items-center gap-8">
-                <Link href="/" className="flex items-center space-x-2">
-                  <Logo>CareerCraft</Logo>
+                <Link href="/" className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+                    <span className="text-white text-sm font-bold">CV</span>
+                  </div>
+                  <Logo>CVstudio</Logo>
                 </Link>
                 <NavLinks>
                   <Link href="/templates" className="nav-link">
@@ -480,7 +483,12 @@ const HomeLayout = () => {
           <div className="container mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
               <div>
-                <Logo className="mb-6">CareerCraft</Logo>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+                    <span className="text-white text-sm font-bold">CV</span>
+                  </div>
+                  <Logo>CVstudio</Logo>
+                </div>
                 <p className="text-gray-400">
                   Build your future with our AI-powered resume builder.
                 </p>
@@ -570,7 +578,7 @@ const HomeLayout = () => {
               </div>
             </div>
             <div className="mt-20 pt-8 border-t border-white/10 text-center text-gray-400">
-              <p>&copy; {new Date().getFullYear()} CareerCraft. All rights reserved.</p>
+              <p>&copy; {new Date().getFullYear()} CVstudio. All rights reserved.</p>
             </div>
           </div>
         </footer>
