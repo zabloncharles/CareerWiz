@@ -27,7 +27,7 @@
     "color": "^4.2.3",
     "dayjs": "^1.11.1",
     "export-from-json": "^1.6.0",
-    "framer-motion": "^6.3.0",
+    "framer-motion": "^6.5.1",
     "html-react-parser": "^3.0.1",
     "immer": "^9.0.12",
     "jodit": "^3.18.6",
