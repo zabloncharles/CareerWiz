@@ -131,5 +131,10 @@
       "score": "8.3 CGPA",
       "courses": []
     }
-  ]
+  ],
+
+  "activities": {
+    "achievements": "• Awarded 'Best Frontend Developer' at Company Hackathon 2023\n• Led successful migration of legacy codebase to modern React architecture\n• Reduced application load time by 45% through performance optimizations",
+    "involvements": "• Active contributor to open-source React component libraries\n• Regular speaker at local JavaScript meetups\n• Mentor for junior developers through company mentorship program"
+  }
 }
