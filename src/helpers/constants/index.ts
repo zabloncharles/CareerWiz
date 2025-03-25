@@ -38,11 +38,13 @@ export const AVAILABLE_TEMPLATES = {
     id: 'modern',
     name: 'Modern',
     component: MordernTemplate,
+    thumbnail: '/templates/modern.png'
   },
   minimal: {
     id: 'minimal',
     name: 'Minimal',
     component: MinimalTemplate,
+    thumbnail: '/templates/minimal.png'
   },
 } as const;
 
