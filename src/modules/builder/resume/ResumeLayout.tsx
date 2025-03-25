@@ -14,7 +14,7 @@ export let StateContext: Context<any> = createContext(null);
 export const ResumeLayout = () => {
   const resumeData = useResumeStore();
   const zoom = useZoom((state) => state.zoom);
-
+  const setTemplate = useTemplates((state) => state.setTemplate);
   const templateId = useTemplates((state) => state.activeTemplate.id);
   const Template = AVAILABLE_TEMPLATES[templateId].component;
   const selectedTheme = useThemes((state) => state.selectedTheme);
@@ -23,8 +23,8 @@ export const ResumeLayout = () => {
   useEffect(() => {
     const selectedTemplateId =
       localStorage.getItem('selectedTemplateId') || AVAILABLE_TEMPLATES['modern'].id;
-    useTemplates.getState().setTemplate(AVAILABLE_TEMPLATES[selectedTemplateId]);
-  }, []);
+    setTemplate(AVAILABLE_TEMPLATES[selectedTemplateId]);
+  }, [setTemplate]);
 
   return (
     <div className="mx-5 print:mx-0 mb-2 print:mb-0">
